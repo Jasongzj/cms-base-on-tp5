@@ -1,0 +1,27 @@
+<div class="col-sm-3 col-md-3">
+        <div class="right-title">
+          <h3>文章排行</h3>
+          <span>TOP ARTICLES</span>
+        </div>
+        <div class="right-content">
+          <ul>
+            {volist name="newsRank" id="rankNews" key="i"}          
+            <li {if condition="$i eq 1"} class="num{$i} curr" {else/} class="num{$i}" {/if}>
+              <a target="_blank" href="/index.php/index/detail/index/id/{$rankNews.news_id}">{$rankNews.small_title}</a>
+              {if condition="$i eq 1"}
+              <div class="intro">
+                {$rankNews.description}
+              </div>
+              {/if}
+            </li>
+            {/volist}
+
+          </ul>
+        </div>
+        
+        {volist name="advNews" id="adv"}
+        <div class="right-hot">
+          <a target="_blank" href="{if condition="$adv['url'] eq null"} /index.php/index/detail/index/id/{$adv.news_id} {else/} {$adv.url} {/if}"><img src="{$adv.thumb}" alt="{$adv.title}"></a>
+        </div>
+        {/volist}
+</div>

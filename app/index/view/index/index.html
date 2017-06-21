@@ -1,0 +1,79 @@
+{include file="index/header"}
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-9">
+        <div class="banner">
+        <!-- 大图轮播图banner -->
+	        <div class="banner-left">
+				<div class="container-fluid">
+					<div id="myCarousel" class="carousel slide" data-interval="3000"
+						data-pause="false">
+						<!-- 轮播（Carousel）指标 -->
+						<ol class="carousel-indicators">
+							{volist name="topPicNews" id="news" key="i""}
+							<li data-target="#myCarousel" data-slide-to="{$i}" {if condition="$i eq 1"}class="active"{/if}></li>
+							{/volist}
+						</ol>
+						<!-- 轮播（Carousel）项目 -->
+						<div class="carousel-inner">
+							{volist name="topPicNews" id="news" key="i""}
+							<div class="item {if condition="$i eq 1"}active{/if}">
+								<a target="_blank" href="/index.php/index/detail/index/id/{$news['news_id']}">
+									<img width="670" height="480" src="{$news['thumb']}" alt="">
+								</a>
+							</div>
+							{/volist}						
+						</div>
+						<!-- 轮播（Carousel）导航 -->
+						<a class="carousel-control left" href="#myCarousel" data-slide="prev"> 
+							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a> 
+						<a class="carousel-control right" href="#myCarousel" data-slide="next"> 
+							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
+					</div>
+				</div>
+			</div>
+          <div class="banner-right">
+            <ul>
+              {volist name="topSmPicNews" id="topSN"}
+              <li>
+                <a target="_blank" href="/index.php/index/detail/index/id/{//$topSN.news_id}"><img width="150" height="150" src="{$topSN.thumb}" alt="{$topSN.title}"></a>
+              </li>
+              {/volist}
+            </ul>
+          </div>
+        </div>
+        <div class="news-list">
+          {volist name="listNews" id="listNews"}  
+          <dl>
+              <a target="_blank" href="/index.php/index/detail/index/id/{$listNews.news_id}"><dt>{$listNews.title}</dt></a>
+            <dd class="news-img">
+              <a target="_blank" href="/index.php/index/detail/index/id/{$listNews.news_id}"><img width="200" height="120" src="{$listNews.thumb}" alt="{$listNews.title}"></a>
+            </dd>
+            <dd class="news-intro">
+              {$listNews.description}
+            </dd>
+            <dd class="news-info">
+              {$listNews.keywords} <span>{$listNews.create_time|date="Y-m-d H:i:s",###}</span> 阅读(<i news-id="{$listNews.news_id}" class="news_count node-{$listNews.news_id}">{$listNews.count}</i>)
+            </dd>
+          </dl>
+          {/volist}   
+        </div>
+      </div>
+      <!--网站右侧排行-->
+      {include file="index/right" }
+    </div>
+  </div>
+</section>
+</body>
+<script src="__JS__/jquery-3.2.1.min.js"></script>
+<script src="__JS__/count.js"></script>
+<script src="__JS__/bootstrap.min.js"></script>
+<script>
+$("#myCarousel").carousel('cycle');
+</script>
+</html>
